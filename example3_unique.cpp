@@ -1,6 +1,6 @@
 #include <iostream>
 #include <stdexcept>
-
+#include <memory>
 void validateArguments(int argc)
 {
     if(argc != 2)
@@ -28,18 +28,19 @@ int main(int argc, char* argv[])
     validateArguments(argc);
 
     const char* argument = argv[1];
-    Resource* rsc = nullptr;
+    
 
     try
     {
-        rsc = new Resource();
+        auto rsc = std::make_unique<Resource>();
         rsc->use(argument);
-        delete rsc;
+        
     }
     catch (std::logic_error& e)
     {
-        delete rsc;
+       
         std::cout << e.what() << std::endl;
     }
     return 0;
 }
+
