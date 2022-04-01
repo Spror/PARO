@@ -14,12 +14,23 @@ struct Product final
     bool operator<(Product const& o) const { return price < o.price; }
     // Note: This class should not be touched.
 };
-
+bool CompareProduct(Product const product_1, Product const product_2)
+{
+    return (product_1 < product_2);
+}
 vector<Product> find_cheapest(vector<Product> const& v, unsigned num)
 {
     // TODO: return x cheapest products, where x is function param (num)
     // Note: Please pay attention to performance.
-    return vector<Product>();
+
+    vector<Product> Cheapest_Products = v;
+    sort(Cheapest_Products.begin(), Cheapest_Products.end(), CompareProduct);
+
+    if((size_t) num  > Cheapest_Products.size())
+        return vector<Product>{Cheapest_Products.begin(), Cheapest_Products.begin()+ Cheapest_Products.size()};
+
+    return vector<Product>{Cheapest_Products.begin(), Cheapest_Products.begin()+ (size_t) num};
+    
 }
 
 TEST(Cheap, Test)
