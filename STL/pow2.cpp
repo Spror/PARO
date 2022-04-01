@@ -9,7 +9,10 @@ template <typename T>
 vector<T> pow2(vector<T> const& input)
 {
     // TODO:      This function should return input elements raised to the power of two.
-    return vector<T>{};
+    vector<T> Pow2_Values = input;
+
+    transform(input.begin(), input.end(),input.begin(), Pow2_Values.begin(), multiplies<T>());
+    return vector<T>{Pow2_Values};
 }
 
 TEST(Pow2Test, Test)
