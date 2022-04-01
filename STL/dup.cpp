@@ -2,7 +2,7 @@
 
 #include <algorithm>
 #include <vector>
-
+#include <unordered_set>
 using namespace std;
 
 template <typename T>
@@ -10,7 +10,14 @@ vector<T> unique(vector<T> const& first, vector<T> const& second)
 {
     // TODO:      This function should join input vectors and return only unique elements.
     // Important: Use only containers! No algorithms allowed.
-    return vector<T>{};
+
+    vector<T> Connected_Vectors = first;
+    Connected_Vectors.insert(Connected_Vectors.end(), second.begin(), second.end());
+
+
+    unordered_set<T> Unique_Elements(Connected_Vectors.begin(), Connected_Vectors.end());
+    Connected_Vectors.assign(Unique_Elements.begin(), Unique_Elements.end());
+    return vector<T>{Connected_Vectors};
 }
 
 TEST(DupTest, Test)
